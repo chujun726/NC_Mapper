@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLayers Map</title>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+  <link rel="stylesheet" href="viewer.css">
+  <link rel="stylesheet" href="layercard.css">
+  <link rel="stylesheet" href="map.css">
+  <link rel="stylesheet" href="../FP/style.css">
+  <script type="text/javascript" src="./layercard.js"></script> <!-- 控制圖層欄位 -->
+  <script type="text/javascript" src="./page.js"></script>  <!-- 控制頁面跳轉 -->
+
+
+
+    
+
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <img src="../FP/img/logo.png" alt="NC Mapper Logo" class="logo">
+      <h1 id="web-name">NC Mapper</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Tutorial</a></li>
+        <li><a href="#">Donate Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="https://www.geog.ntu.edu.tw/index.php/tw/">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+
+<div class="app-container">
+    <!-- 左側圖層面板 -->
+    <div class="layer-panel">
+      <h3>Layer Panel</h3>
+
+
+
+      <!-- Class =layer-title是我們要更名的嗎?  -->
+      <!-- 控制顯示 id =  toggle-visibility-{圖層名稱}  -->
+
+          
+
+      <!-- 卡片：Grid Layer -->
+      <div class="layer-card">
+        <div class="layer-header">
+          <!-- 左側顯示/隱藏按鈕 -->
+          <img id="toggle-visibility-layer" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+          <span class="layer-title">Grid Lines</span>
+          <span class="layer-subtitle">Grid Layer</span>
+          <button class="options-btn">⋮</button>
+        </div>
+        <!-- 控制選項 -->
+        <div class="layer-controls">
+          <div class="control-item">
+            <span class="color-display">#AAAAAA</span>
+            <label>Color</label>
+            <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
+          </div>
+          <div class="control-item">
+            <span class="width-display">7px</span>
+            <label>Width</label>
+            <input type="number" value="7" class="width-input" style="display: none;" /> 
+          </div>
+          <div class="control-item">
+            <span class="interval-display">30°</span>
+            <label>Interval</label>
+            <input type="number" value="30" class="interval-input" style="display: none;" /> 
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片：Line Layer -->
+      <div class="layer-card">
+        <div class="layer-header">
+          <!-- 左側顯示/隱藏按鈕 -->
+          <img id="toggle-visibility-line" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+          <span class="layer-title">Coastal & Country line</span>
+          <span class="layer-subtitle">Line Layer</span>
+          <button class="options-btn">⋮</button>
+        </div>
+        <!-- 控制選項 -->
+        <div class="layer-controls">
+          <div class="control-item">
+            <span class="color-display">#AAAAAA</span>
+            <label>Color</label>
+            <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
+          </div>
+          <div class="control-item">
+            <span class="width-display">7px</span>
+            <label>Width</label>
+            <input type="number" value="7" class="width-input" style="display: none;" /> 
+          </div>
+          <div class="control-item">
+            <span class="resolution-display">50m</span>
+            <label>Interval</label>
+            <input type="number" value="50" class="resolution-input" style="display: none;" /> 
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片：contour Layer -->
+      <div class="layer-card">
+        <div class="layer-header">
+          <!-- 左側顯示/隱藏按鈕 -->
+          <img id="toggle-visibility-contour" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+          <span class="layer-title">Contour line</span>
+          <span class="layer-subtitle">Contour Layer</span>
+          <button class="options-btn">⋮</button>
+        </div>
+        <!-- 控制選項 -->
+        <div class="layer-controls">
+          <div class="control-item">
+            <span class="color-display">#AAAAAA</span>
+            <label>Color</label>
+            <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
+          </div>
+          <div class="control-item">
+            <span class="width-display">7px</span>
+            <label>Width</label>
+            <input type="number" value="7" class="width-input" style="display: none;" /> 
+          </div>
+          <div class="control-item">
+            <span class="interval-display">30°</span>
+            <label>Interval</label>
+            <input type="number" value="30" class="interval-input" style="display: none;" /> 
+          </div>
+        </div>
+      </div>
+
+    <!-- 卡片：Shading Layer -->
+    <div class="layer-card">
+      <div class="layer-header">
+        <!-- 左側顯示/隱藏按鈕 -->
+        <img id="toggle-visibility-shading" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+        <span class="layer-title">Shading Layer</span>
+        <span class="layer-subtitle">u_compend_of_wind</span>
+        <button class="options-btn">⋮</button>
+      </div>
+      <!-- 控制選項 -->
+      <div class="layer-controls">
+
+
+        <!-- 色票可能要特別改? -->
+        <div class="control-item">
+          <span class="color-display">#AAAAAA</span>
+          <label>Start Color</label>
+          <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
+        </div>
+
+        <div class="control-item">
+          <span class="color-display">#444444</span>
+          <label>End Color</label>
+          <input type="color" value="#444444" class="color-input" style="display: none;" />
+        </div>
+
+
+        <div class="control-item">
+          <span class="level-display">700m</span>
+          <label>Level</label>
+          <input type="number" value="700" class="level-input" style="display: none;" />
+        </div>
+
+
+      </div>
+    </div>
+      <!-- 其他圖層重複 -->
+    </div>
+  
+    <!-- 地圖視圖 -->
+    <div class="map-view">
+
+          <!-- 地圖canvas主要介面 -->
+      <div id="map" class="map-container">
+
+        <script src="https://cdn.jsdelivr.net/npm/ol/dist/ol.js"></script>
+        <script>
+          // OpenLayers 地圖初始化
+          const map = new ol.Map({
+            target: 'map', // 將地圖綁定到 map-container
+            layers: [
+              // 基本圖層：OpenStreetMap 圖層
+              new ol.layer.Tile({
+                source: new ol.source.OSM(),
+              }),
+            ],
+            view: new ol.View({
+              center: ol.proj.fromLonLat([0, 0]), // 地圖中心（經度, 緯度）
+              zoom: 2, // 初始縮放級別
+            }),
+          });
+      
+          // 加入格網線（可選）
+          const graticule = new ol.layer.Graticule({
+            strokeStyle: new ol.style.Stroke({
+              color: 'rgba(211, 211, 211, 0.9)', // 格網線顏色
+              width: 1,
+            }),
+            showLabels: true, // 顯示經緯度標籤
+            wrapX: false,
+          });
+          map.addLayer(graticule);
+      
+          // 控制工具（比例尺等）
+          map.addControl(new ol.control.ScaleLine());
+        </script>
+      </div>
+      
+      </div>
+      <div class="time-slider">
+        <input type="range" min="2020-01-01" max="2020-12-31" />
+        <span>2020-01-01 00:00</span>
+      </div>
+    </div>
+  </div>
+</body>

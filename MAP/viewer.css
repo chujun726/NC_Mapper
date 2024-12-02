@@ -1,0 +1,45 @@
+/* 整體樣式 */
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+
+
+
+  /* 儲存按鈕 (save-btn) 的額外樣式 */
+  .top-bar .save-btn {
+    font-weight: bold; /* 儲存按鈕文字加粗 */
+  }
+
+
+
+  
+  /* 地圖視圖 */
+  .map-view {
+    flex: 1;
+    position: relative;
+  }
+  
+  .map-container {
+    height: calc(100% - 50px);
+    position: relative;
+  }
+  
+  .legend {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .time-slider {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+  }
