@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NC Mapper</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="./script.js"></script>
+</head>
+
+<body>
+  <!-- 頁面頂部導航欄 -->
+  <header>
+    <div class="header-content">
+      <img src="./img/logo_light.png" alt="NC Mapper Logo" class="logo">
+      <h1 id="web-name">NC Mapper</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Tutorial</a></li>
+        <li><a href="#">Donate Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="https://www.geog.ntu.edu.tw/index.php/tw/">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Step 1: 檔案上傳區域 -->
+    <!-- 首頁左側：上傳 NC 檔案的主要區域 -->
+    <div class="right-section">
+      <h1>NetCDF to Professional Map</h1>
+      <h2>Immediately</h2>
+      <p>Whether you need to quickly view a NetCDF file or create a beautiful scientific map, this tool is designed for you!</p>
+      <div class="file-upload">
+        <input type="file" id="nc-file" accept=".nc"/>
+        <button id="start-mapping" class="primary-btn">Start Mapping</button>
+      </div>
+    </div>
+
+    <!-- 首頁右側：展示範例地圖 -->
+    <div class="left-section">
+      <img src="./img/圖片1.png" alt="Sample Map 1" class="sample-map">
+      <img src="./img/圖片2.png" alt="Sample Map 2" class="sample-map">
+      <img src="./img/圖片3.png" alt="Sample Map 3" class="sample-map">
+      <img src="./img/圖片4.png" alt="Sample Map 4" class="sample-map">
+    </div>
+
+    <!-- 通用載入動畫遮罩：用於顯示載入狀態 -->
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="spinner-container">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+
+    <!-- Step 2: 維度選擇視窗 -->
+    <!-- 用於確認資料維度對應關係，包含經度、緯度、高度和時間的選擇 -->
+    <div id="dimension-modal" class="dimension-modal">
+      <div class="dimension-modal-content">
+        <h2 class="dimension-modal-title">Step1. Please confirm the dimensions represented by each coordinate.</h2>
+        
+        <!-- 經度選擇（必填） -->
+        <div class="dimension-select-group">
+          <div class="dimension-select-label">
+            <span class="required-star">*</span>Which one is <strong>longitude</strong>?
+          </div>
+          <select id="longitude-select" class="dimension-select">
+            <option value="">Select a dimension</option>
+          </select>
+        </div>
+        
+        <!-- 緯度選擇（必填） -->
+        <div class="dimension-select-group">
+          <div class="dimension-select-label">
+            <span class="required-star">*</span>Which one is <strong>latitude</strong>?
+          </div>
+          <select id="latitude-select" class="dimension-select">
+            <option value="">Select a dimension</option>
+          </select>
+        </div>
+        
+        <!-- 高度選擇 -->
+        <div class="dimension-select-group">
+          <div class="dimension-select-label">
+            Which one is <strong>height</strong>?
+          </div>
+          <select id="height-select" class="dimension-select">
+            <option value="">Select a dimension</option>
+          </select>
+        </div>
+        
+        <!-- 時間選擇 -->
+        <div class="dimension-select-group">
+          <div class="dimension-select-label">
+            Which one is <strong>time</strong>?
+          </div>
+          <select id="time-select" class="dimension-select">
+            <option value="">Select a dimension</option>
+          </select>
+        </div>
+        
+        <div class="text-right">
+          <button id="confirm-dimensions" class="dimension-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Step 3: 變量選擇視窗 -->
+    <!-- 用於選擇要繪製的資料變量和對應高度 -->
+    <div id="variables-modal" class="variables-modal">
+      <div class="variables-modal-content">
+        <h2>Step2. Please select variables you want to plot.</h2>
+        
+        <div class="variables-container">
+          <!-- 左側：Shading layer 設定 -->
+          <div class="layer-section">
+            <h3>Shading layer</h3>
+            
+            <!-- Shading 變量選擇 -->
+            <div class="variable-select-group">
+              <label>Select Variable</label>
+              <select id="shading-variable" class="variable-select">
+                <option value="">Select a variable</option>
+              </select>
+            </div>
+            
+            <!-- Shading 高度選擇 -->
+            <div class="variable-select-group">
+              <label>Select Height</label>
+              <select id="shading-height" class="variable-select">
+                <option value="">Select height</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 右側：Contour layer 設定 -->
+          <div class="layer-section">
+            <h3>Contour layer</h3>
+            
+            <!-- Contour 變量選擇 -->
+            <div class="variable-select-group">
+              <label>Select Variable</label>
+              <select id="contour-variable" class="variable-select">
+                <option value="None">None</option>
+              </select>
+            </div>
+            
+            <!-- Contour 高度選擇 -->
+            <div class="variable-select-group">
+              <label>Select Height</label>
+              <select id="contour-height" class="variable-select">
+                <option value="None">None</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <button id="confirm-variables" class="confirm-btn">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
