@@ -343,6 +343,11 @@ class NetCDFDataset(object):
             z_list = list(z_values)
         except KeyError:
             z_list = list()
+
+        # 回傳高度軸的值
+        for i in range(len(z_list)):
+            z_list[i] = float(z_list[i])
+
         return z_list
 
     def __select(self,
