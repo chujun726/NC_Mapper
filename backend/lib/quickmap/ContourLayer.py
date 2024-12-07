@@ -3,6 +3,12 @@ Author: ericlwc (github: ericlwc0830)
 Date: 2024-11-07
 Description: This module defines a contour layer class for quickmap.
 """
+from cartopy import crs as ccrs
+import folium
+import matplotlib.pyplot as plt
+import numpy as np
+import json
+
 from .Raster import Raster
 from .utils import *
 
@@ -44,6 +50,7 @@ class ContourLayer(Raster):
         - slice_data_by_data_coordinate_system(x_left, x_right, y_bottom, y_top): 根據資料的座標系統切割本圖層。
         - generalize(size: int, normalize: bool): 對網格資料進行簡化（平均模糊），並完整紀錄簡化程度。
         - blur(range: int): 單純對陣列進行平均模糊。（不建議，建議使用generalize）
+        - export_to_geojson_str(): 將等值線圖層匯出成geojson字串。
     """
 
     def __init__(self,
@@ -217,3 +224,60 @@ class ContourLayer(Raster):
 
         # 間距預設為20個等級
         self.value_interval = (value_max - value_min) / 15
+
+    def export_to_geojson_str(self):
+        """
+        將等值線圖層匯出成geojson字串。
+
+        Returns
+            - str: geojson字串。
+        """
+        # 註：目前並無首曲線計曲線的差異，並且處理標籤
+        # load attributes
+        data = self.data  # 網格資料 numpy array
+        value_base = self.value_base  # 等值線的基準值
+        value_interval = self.value_interval
+        min_of_original_data = self.min_of_original_data
+        max_of_original_data = self.max_of_original_data
+        crs = ccrs.PlateCarree()
+
+        # Generate contour levels list
+        levels_above_base = np.arange(value_base, max_of_original_data, value_interval).astype(float).tolist()
+        levels_below_base = np.arange(value_base, min_of_original_data, -value_interval).astype(float).tolist()
+        levels = levels_below_base[::-1][:-1] + levels_above_base
+
+        # Generate contour lines
+        X, Y = np.meshgrid(self.lon_list, self.lat_list)
+        fig, ax = plt.subplots()
+        CS = ax.contour(X, Y, data, levels=levels)
+        plt.close(fig)  # Close the figure to free memory
+
+        features = []
+
+        for i, level in enumerate(CS.levels):
+            segs = CS.allsegs[i]
+            for seg in segs:
+                coords = seg.tolist()
+                geometry = {
+                    "type": "LineString",
+                    "coordinates": coords
+                }
+                feature = {
+                    "type": "Feature",
+                    "geometry": geometry,
+                    "properties": {
+                        "value": level
+                    }
+                }
+                features.append(feature)
+
+        # Create GeoJSON FeatureCollection
+        geojson = {
+            "type": "FeatureCollection",
+            "features": features
+        }
+
+        # Convert to string
+        geojson_str = json.dumps(geojson)
+
+        return geojson_str
