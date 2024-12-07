@@ -99,7 +99,9 @@
   background-color: #f7f7f7;
 }
 .color-input {
-  display: none; /* 隱藏顏色選擇器 */
+  position: relative; /* 使用相對定位 */
+  display: none; /* 預設隱藏 */
+  z-index: 1000; /* 保證顏色選擇器在最上層 */
 }
 
 /* 寬度大小 */

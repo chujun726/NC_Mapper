@@ -3,10 +3,9 @@
 document.addEventListener('DOMContentLoaded', function () { // 確保資源加載完畢
 
 
-       // 1. 改變框線顏色  變數為newColor
 
 
-  // 選取所有 class 為 visibility-icon 的元素
+  // 控制圖層的開關或隱藏
   document.querySelectorAll('.visibility-icon').forEach((icon) => {
     // 為每個元素綁定 click 事件
     icon.addEventListener('click', function () {
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
       const currentSrc = visibilityIcon.getAttribute('src'); // 獲取目前的 src 屬性
       console.log("Hidden button clicked"); // 記錄按鈕被點擊
 
-      // 切換 src 屬性
+      // 底圖隱藏
       if (currentSrc === './fig/view.png') {
         visibilityIcon.setAttribute('src', './fig/hide.png');
       } else {
@@ -23,8 +22,9 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
     });
   });
   
+  // 1. 控制圖層渲染顏色 變數為newColor
 
-    // 選擇所有具有顏色顯示的控制項
+    // 顏色選取器
     document.querySelectorAll('.color-display').forEach((span) => {
         // 點擊顏色顯示值 (#AAA)
         span.addEventListener('click', function () {
@@ -37,8 +37,9 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
         });
     });
     
-    // 更新顏色顯示值
+    // 使用者選擇顏色後更新顯示值
     document.querySelectorAll('.color-input').forEach((input) => {
+      
         input.addEventListener('input', function () {
         // 找到對應的顏色顯示元素
         const colorDisplay = this.previousElementSibling.previousElementSibling;
@@ -53,10 +54,10 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
     });
 
 
-     // 2. 改變線的寬度大小  變數為value
+     // 2. 改變線的寬度(width)大小  變數為value
 
 
-    // 點擊顯示數字輸入框
+    // 顯示width的輸入選單
   document.querySelectorAll('.width-display').forEach((span) => {
     span.addEventListener('click', function () {
       const input = this.nextElementSibling.nextElementSibling; // 找到對應的輸入框
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
     });
   });
 
-  // 當輸入框失去焦點時，顯示文字框並隱藏輸入框
+  //選擇與紀錄width，並限制範圍在5-50px之間
   document.querySelectorAll('.width-input').forEach((input) => {
     input.addEventListener('blur', function () {
       const span = this.previousElementSibling.previousElementSibling; // 找到對應的文字框
@@ -95,9 +96,9 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
 });
 
 
-  // 3. 改變間距大小  變數為interval_value
+  // 3. 改變隔線間距大小(interval)  變數為interval_value
 
-// 點擊顯示數字輸入框
+  // 顯示interval的輸入選單
 document.querySelectorAll('.interval-display').forEach((span) => {
   span.addEventListener('click', function () {
     const input = this.nextElementSibling.nextElementSibling; // 找到對應的輸入框
@@ -109,7 +110,7 @@ document.querySelectorAll('.interval-display').forEach((span) => {
   });
 });
 
-  // 當輸入框失去焦點時，顯示文字框並隱藏輸入框
+  // 選擇與紀錄interval，並限制範圍在0-90度之間
   document.querySelectorAll('.interval-input').forEach((input) => {
     input.addEventListener('blur', function () {
       const span = this.previousElementSibling.previousElementSibling; // 找到對應的文字框
@@ -135,9 +136,9 @@ document.querySelectorAll('.interval-display').forEach((span) => {
     });
   });
 
-   // 4. 改變解析度  變數為res_value
+   // 4. 改變解析度(resolution)  變數為res_value
 
-  // 點擊顯示數字輸入框
+  // 顯示resolution的輸入選單
 document.querySelectorAll('.resolution-display').forEach((span) => {
   span.addEventListener('click', function () {
     const input = this.nextElementSibling.nextElementSibling; // 找到對應的輸入框
@@ -149,7 +150,7 @@ document.querySelectorAll('.resolution-display').forEach((span) => {
   });
 });
 
-  // 當輸入框失去焦點時，顯示文字框並隱藏輸入框
+   // 選擇與紀錄resolution，並限制範圍在0公尺以上
   document.querySelectorAll('.resolution-input').forEach((input) => {
     input.addEventListener('blur', function () {
       const span = this.previousElementSibling.previousElementSibling; // 找到對應的文字框
@@ -175,7 +176,8 @@ document.querySelectorAll('.resolution-display').forEach((span) => {
     });
   });
 
-  
+    
+  // 5. 改變解析度(level)  變數為lev_value
 
   // 點擊顯示數字輸入框
   document.querySelectorAll('.level-display').forEach((span) => {
@@ -189,7 +191,7 @@ document.querySelectorAll('.resolution-display').forEach((span) => {
     });
   });
 
-  // 當輸入框失去焦點時，顯示文字框並隱藏輸入框
+  // 顯示level的輸入選單，並限制高程在0公尺以上
   document.querySelectorAll('.level-input').forEach((input) => {
     input.addEventListener('blur', function () {
       const span = this.previousElementSibling.previousElementSibling; // 找到對應的文字框

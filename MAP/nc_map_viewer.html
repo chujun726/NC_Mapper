@@ -5,16 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OpenLayers Map</title>
 
-
-
-
+  <!-- ol css   -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.1.0/ol.css">
+
   <link rel="stylesheet" href="viewer.css">
   <link rel="stylesheet" href="layercard.css">
   <link rel="stylesheet" href="map.css">
   <link rel="stylesheet" href="../FP/style.css">
+
+  <!-- 必要的库 -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@v8.1.0/dist/ol.js"></script>
+  
+
   <script type="text/javascript" src="./layercard.js"></script> <!-- 控制圖層欄位 -->
   <script type="text/javascript" src="./page.js"></script>  <!-- 控制頁面跳轉 -->
+  <script type="text/javascript" src="./map.js"></script>
+
+  
 
 
 
@@ -63,17 +71,17 @@
         </div>
         <!-- 控制選項 -->
         <div class="layer-controls">
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="color-display">#AAAAAA</span>
             <label>Color</label>
             <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
           </div>
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="width-display">7px</span>
             <label>Width</label>
             <input type="number" value="7" class="width-input" style="display: none;" /> 
           </div>
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="interval-display">30°</span>
             <label>Interval</label>
             <input type="number" value="30" class="interval-input" style="display: none;" /> 
@@ -92,19 +100,19 @@
         </div>
         <!-- 控制選項 -->
         <div class="layer-controls">
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="color-display">#AAAAAA</span>
             <label>Color</label>
             <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
           </div>
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="width-display">7px</span>
             <label>Width</label>
             <input type="number" value="7" class="width-input" style="display: none;" /> 
           </div>
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="resolution-display">50m</span>
-            <label>Interval</label>
+            <label>Resolution</label>
             <input type="number" value="50" class="resolution-input" style="display: none;" /> 
           </div>
         </div>
@@ -121,17 +129,17 @@
         </div>
         <!-- 控制選項 -->
         <div class="layer-controls">
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="color-display">#AAAAAA</span>
             <label>Color</label>
             <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
           </div>
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="width-display">7px</span>
             <label>Width</label>
             <input type="number" value="7" class="width-input" style="display: none;" /> 
           </div>
-          <div class="control-item">
+          <div class="control-item" style="position: relative;">
             <span class="interval-display">30°</span>
             <label>Interval</label>
             <input type="number" value="30" class="interval-input" style="display: none;" /> 
@@ -153,20 +161,20 @@
 
 
         <!-- 色票可能要特別改? -->
-        <div class="control-item">
+        <div class="control-item" style="position: relative;">
           <span class="color-display">#AAAAAA</span>
           <label>Start Color</label>
           <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
         </div>
 
-        <div class="control-item">
+        <div class="control-item" style="position: relative;">
           <span class="color-display">#444444</span>
           <label>End Color</label>
           <input type="color" value="#444444" class="color-input" style="display: none;" />
         </div>
 
 
-        <div class="control-item">
+        <div class="control-item" style="position: relative;">
           <span class="level-display">700m</span>
           <label>Level</label>
           <input type="number" value="700" class="level-input" style="display: none;" />
@@ -184,37 +192,6 @@
           <!-- 地圖canvas主要介面 -->
       <div id="map" class="map-container">
 
-        <script src="https://cdn.jsdelivr.net/npm/ol/dist/ol.js"></script>
-        <script>
-          // OpenLayers 地圖初始化
-          const map = new ol.Map({
-            target: 'map', // 將地圖綁定到 map-container
-            layers: [
-              // 基本圖層：OpenStreetMap 圖層
-              new ol.layer.Tile({
-                source: new ol.source.OSM(),
-              }),
-            ],
-            view: new ol.View({
-              center: ol.proj.fromLonLat([0, 0]), // 地圖中心（經度, 緯度）
-              zoom: 2, // 初始縮放級別
-            }),
-          });
-      
-          // 加入格網線（可選）
-          const graticule = new ol.layer.Graticule({
-            strokeStyle: new ol.style.Stroke({
-              color: 'rgba(211, 211, 211, 0.9)', // 格網線顏色
-              width: 1,
-            }),
-            showLabels: true, // 顯示經緯度標籤
-            wrapX: false,
-          });
-          map.addLayer(graticule);
-      
-          // 控制工具（比例尺等）
-          map.addControl(new ol.control.ScaleLine());
-        </script>
       </div>
       
       </div>
