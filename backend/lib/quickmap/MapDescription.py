@@ -679,26 +679,31 @@ class MapDescription(object):
                 layer.resolution = resolution
         return
 
-    def export_to_json_for_ncmapper(self, json_path: str | None = None, include_original_data: bool = True) -> str:
+    def export_to_json_for_ncmapper(self, json_path: str | None = None, include_original_array: bool = True, include_contour_geojson: bool = True) -> str:
         """
         為ncmaper，將地圖描述文件導出為json文件。
 
         Args
             - json_path: str|None
                 json文件的路徑，若為None，則只返回json字符串，預設為None。
-            - include_original_data: bool
-                是否將原始資料(陣列值)導出，預設為True。
+            - include_original_array: bool
+                是否將原始陣列值導出，預設為True。
+            - include_contour_geojson: bool
+                是否將等值線geojson導出，預設為True。
         """
         # check
         if not isinstance(json_path, (str, type(None))):
             raise TypeError("json_path必須是str或None。")
         if json_path is not None:
             json_path = os.path.abspath(json_path)
-            check_file_exist(json_path)
+            json_dir = os.path.dirname(json_path)
+            check_file_exist(json_dir)
             if not json_path.lower().endswith(".json"):
                 raise ValueError("json_path必須是一個json文件。")
-        if not isinstance(include_original_data, bool):
+        if not isinstance(include_original_array, bool):
             raise TypeError("include_original_data必須是bool。")
+        if not isinstance(include_contour_geojson, bool):
+            raise TypeError("include_contour_geojson必須是bool。")
 
         # 產生字典資料
         map_description_dict = {
@@ -745,7 +750,7 @@ class MapDescription(object):
                 "label_title_font": self.colorbar.label_title_font,
             },
             "shading_layer": {
-                'data': self.layer_list.select_layers_by_class(ShadingLayer)[0].data.tolist(),
+                'data': self.layer_list.select_layers_by_class(ShadingLayer)[0].data.tolist() if include_original_array else None,
                 'value_type': self.layer_list.select_layers_by_class(ShadingLayer)[0].value_type,
                 'interpolation': self.layer_list.select_layers_by_class(ShadingLayer)[0].interpolation,
                 'west_bound': self.layer_list.select_layers_by_class(ShadingLayer)[0].west_bound,
@@ -757,7 +762,8 @@ class MapDescription(object):
                 'is_visible': self.layer_list.select_layers_by_class(ShadingLayer)[0].is_visible,
             },
             "contour_layer": {
-                'data': self.layer_list.select_layers_by_class(ContourLayer)[0].data.tolist(),
+                'data': self.layer_list.select_layers_by_class(ContourLayer)[0].data.tolist() if include_original_array else None,
+                'contour_geojson': self.layer_list.select_layers_by_class(ContourLayer)[0].export_to_geojson_str() if include_contour_geojson else None,
                 'value_base': self.layer_list.select_layers_by_class(ContourLayer)[0].value_base,
                 'value_interval': self.layer_list.select_layers_by_class(ContourLayer)[0].value_interval,
                 'primary_contour_each': self.layer_list.select_layers_by_class(ContourLayer)[0].primary_contour_each,
@@ -788,8 +794,9 @@ class MapDescription(object):
             }
         }
 
-        if not include_original_data:
-            map_description_dict["shading_layer"]['data'] = None
-            map_description_dict["contour_layer"]['data'] = None
+        # save
+        json_str = json.dumps(map_description_dict, indent=4)
+        with open(json_path, mode="w") as jsonfile:
+            jsonfile.write(json_str)
 
-        return json.dumps(map_description_dict, indent=4)
+        return json_str
