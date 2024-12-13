@@ -1,0 +1,291 @@
+/* ==================
+   base
+   ================== */
+   body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  /* ==================
+     head
+     ================== */
+  header {
+    background-color: rgb(96, 118, 128);
+    color: #fff;
+    padding: 6px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  #web-name {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .logo {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: right;
+  }
+  
+  nav li {
+    margin: 0 15px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  /* ==================
+     main
+     ================== */
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+  }
+  
+  /* 左右區塊共同樣式 */
+  .left-section,
+  .right-section {
+    width: 50%;
+    padding: 30px;
+  }
+  
+  /* 左側區塊：範例地圖 */
+  .left-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+  
+  .sample-map {
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 30px;
+  }
+  
+  /* 右側區塊：上傳區域 */
+  .right-section {
+    background-color: rgb(248, 246, 244);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 50px;
+    border-radius: 30px;
+  }
+  
+  .right-section h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .right-section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    background: linear-gradient(to top, #3a1c71, #d76d77, #ffaf7b);
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* ==================
+     Step1 檔案上傳區域
+     ================== */
+  .file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .file-upload input[type="file"] {
+    margin-right: 10px;
+  }
+  
+  .primary-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  /* ==================
+     載入動畫
+     ================== */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .spinner-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* ==================
+     Step 2 維度選擇模態框
+     ================== */
+  .dimension-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .dimension-modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .dimension-modal-title {
+    margin-bottom: 30px;
+  }
+  
+  .dimension-select-group {
+    margin-bottom: 20px;
+  }
+  
+  .dimension-select-label {
+    margin-bottom: 10px;
+  }
+  
+  .required-star {
+    color: red;
+  }
+  
+  .dimension-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .dimension-confirm {
+    padding: 10px 30px;
+    background: #607680;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* ==================
+     Step 3 變量選擇模態框
+     ================== */
+  .variables-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .variables-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 800px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .variables-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .layer-section {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .variable-select-group {
+    margin-bottom: 20px;
+  }
+  
+  .variable-select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .confirm-btn {
+    padding: 8px 20px;
+    background: #607680;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  /* 通用類 */
+  .text-right {
+    text-align: right;
+  }
