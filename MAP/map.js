@@ -288,8 +288,6 @@ function initializeGridLayer() {
     }
     //loadContourLayer();
   
-
-  
   // 這裡預計改為ajax讀取tiff資料
   
   let tiff_url = './layer/contour_3857.tif' //tiff路徑
@@ -298,6 +296,48 @@ function initializeGridLayer() {
   let tiff_max = 1100 //tiff最大值
   let bandIndex = [0]
   let opacity = 1
+
+  // colormap
+
+  async function loadRasterLayer(tiff_url,ovr_url = '',tiff_min,tiff_max,bandIndex = [0],opacity = 1) {
+    try {
+      const raster_Layer = new ol.layer.WebGLTile({
+        source: new ol.source.GeoTIFF({
+          sources: [{
+            url: tiff_url,  // 替換成你的檔案路徑
+            overviews: [ovr_url], // 可以為空
+            min: tiff_min, 
+            max: tiff_max,
+            //width: 512, // 降低解析度
+            //height: 512,
+          }],
+          bands: bandIndex,
+          
+        }),
+        opacity: opacity  // 可調整透明度
+      });
+        // 錯誤處理
+      raster_Layer.getSource().on('error', function(event) {
+        console.error('Raster 載入錯誤:', event.error);
+      });
+
+      // 監聽載入狀態
+      raster_Layer.getSource().on('change', function() {
+        console.log('Raster 載入狀態:', this.getState());
+      });
+     // 添加圖層到地圖
+      map.addLayer(raster_Layer);
+
+    } catch (error) {
+      console.error('讀取 GeoTIFF 數據範圍時發生錯誤:', error);
+      throw error; // 向外傳播錯誤
+    }
+
+  }
+  // 載入raster圖層主程式
+  raster_layer = loadRasterLayer(tiff_url,ovr_url,tiff_min,tiff_max,bandIndex,opacity)
+  
+  
 
   // colormap
 
