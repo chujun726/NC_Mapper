@@ -272,51 +272,6 @@ document.addEventListener('DOMContentLoaded', function () {  // 確保資源加�
     });
 
 
-
-        /*
-
-        const contourLayer = new ol.layer.Vector({
-          source: new ol.source.Vector({
-            features: new ol.format.GeoJSON().readFeatures(geojsonData, {
-              featureProjection: 'EPSG:3857' // 投影轉換至 Web Mercator
-            })
-          }),
-
-          // 設定線條外觀，與layerpanel互動
-          
-          style: new ol.style.Style({
-            stroke: new ol.style.Stroke({
-              color: 'blue', // 等高線顏色預設為藍色
-              width: 1 // 等高線寬度
-            }),
-            text: new ol.style.Text({
-              text: value ? value.toString() : '', // 將數值轉為文字作為標籤
-              font: '12px Arial',
-              fill: new ol.style.Fill({
-                color: '#000000' // 黑色文字
-            }),
-            stroke: new ol.style.Stroke({
-              color: '#ffffff', // 白色描邊
-              width: 3
-            }),
-            placement: 'line', // 沿線條顯示標籤
-          })
-        })
-
-        });
-  
-        // 將等高線圖層添加到地圖
-        map.addLayer(contourLayer);
-        console.log('等高線圖層已添加');
-
-        
-        initializeContourline(contourLayer);  //在ajax執行更新地圖
-
-      },
-
-      */
-
-
   
   // 這裡預計改為ajax讀取tiff資料
   
