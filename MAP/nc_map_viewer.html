@@ -14,8 +14,10 @@
   <link rel="stylesheet" href="map.css">
   <link rel="stylesheet" href="../FP/style.css">
 
-  <!-- 必要的库 -->
+  <!-- 地圖相關函式庫 -->
   <script src="https://cdn.jsdelivr.net/npm/ol@v8.1.0/dist/ol.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/geotiff"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>  <!-- 最新版本ol -->
   
 
   <script type="text/javascript" src="./layercard.js"></script> <!-- 控制圖層欄位 -->
@@ -49,142 +51,141 @@
 
 
 <div class="app-container">
-    <!-- 左側圖層面板 -->
-    <div class="layer-panel">
-      <h3>Layer Panel</h3>
+  <div class="layer-panel">
+    <h3>Layer Panel</h3>
 
 
 
-      <!-- Class =layer-title是我們要更名的嗎?  -->
-      <!-- 控制顯示 id =  toggle-visibility-{圖層名稱}  -->
+    <!-- Class =layer-title是我們要更名的嗎?  -->
+    <!-- 控制顯示 id =  toggle-visibility-{圖層名稱}  -->
 
-          
+        
 
-      <!-- 卡片：Grid Layer -->
-      <div class="layer-card">
-        <div class="layer-header">
-          <!-- 左側顯示/隱藏按鈕 -->
-          <img id="toggle-visibility-layer" src="./fig/view.png" alt="visibility" class="visibility-icon" />
-          <span class="layer-title">Grid Lines</span>
-          <span class="layer-subtitle">Grid Layer</span>
-          <button class="options-btn">⋮</button>
-        </div>
-        <!-- 控制選項 -->
-        <div class="layer-controls">
-          <div class="control-item" style="position: relative;">
-            <span class="color-display">#AAAAAA</span>
-            <label>Color</label>
-            <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
-          </div>
-          <div class="control-item" style="position: relative;">
-            <span class="width-display">7px</span>
-            <label>Width</label>
-            <input type="number" value="7" class="width-input" style="display: none;" /> 
-          </div>
-          <div class="control-item" style="position: relative;">
-            <span class="interval-display">30°</span>
-            <label>Interval</label>
-            <input type="number" value="30" class="interval-input" style="display: none;" /> 
-          </div>
-        </div>
-      </div>
-
-      <!-- 卡片：Line Layer -->
-      <div class="layer-card">
-        <div class="layer-header">
-          <!-- 左側顯示/隱藏按鈕 -->
-          <img id="toggle-visibility-line" src="./fig/view.png" alt="visibility" class="visibility-icon" />
-          <span class="layer-title">Coastal & Country line</span>
-          <span class="layer-subtitle">Line Layer</span>
-          <button class="options-btn">⋮</button>
-        </div>
-        <!-- 控制選項 -->
-        <div class="layer-controls">
-          <div class="control-item" style="position: relative;">
-            <span class="color-display">#AAAAAA</span>
-            <label>Color</label>
-            <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
-          </div>
-          <div class="control-item" style="position: relative;">
-            <span class="width-display">7px</span>
-            <label>Width</label>
-            <input type="number" value="7" class="width-input" style="display: none;" /> 
-          </div>
-          <div class="control-item" style="position: relative;">
-            <span class="resolution-display">50m</span>
-            <label>Resolution</label>
-            <input type="number" value="50" class="resolution-input" style="display: none;" /> 
-          </div>
-        </div>
-      </div>
-
-      <!-- 卡片：contour Layer -->
-      <div class="layer-card">
-        <div class="layer-header">
-          <!-- 左側顯示/隱藏按鈕 -->
-          <img id="toggle-visibility-contour" src="./fig/view.png" alt="visibility" class="visibility-icon" />
-          <span class="layer-title">Contour line</span>
-          <span class="layer-subtitle">Contour Layer</span>
-          <button class="options-btn">⋮</button>
-        </div>
-        <!-- 控制選項 -->
-        <div class="layer-controls">
-          <div class="control-item" style="position: relative;">
-            <span class="color-display">#AAAAAA</span>
-            <label>Color</label>
-            <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
-          </div>
-          <div class="control-item" style="position: relative;">
-            <span class="width-display">7px</span>
-            <label>Width</label>
-            <input type="number" value="7" class="width-input" style="display: none;" /> 
-          </div>
-          <div class="control-item" style="position: relative;">
-            <span class="interval-display">30°</span>
-            <label>Interval</label>
-            <input type="number" value="30" class="interval-input" style="display: none;" /> 
-          </div>
-        </div>
-      </div>
-
-    <!-- 卡片：Shading Layer -->
+    <!-- 卡片：Grid Layer -->
     <div class="layer-card">
       <div class="layer-header">
         <!-- 左側顯示/隱藏按鈕 -->
-        <img id="toggle-visibility-shading" src="./fig/view.png" alt="visibility" class="visibility-icon" />
-        <span class="layer-title">Shading Layer</span>
-        <span class="layer-subtitle">u_compend_of_wind</span>
+        <img id="toggle-visibility-layer" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+        <span class="layer-title">Grid Lines</span>
+        <span class="layer-subtitle">Grid Layer</span>
         <button class="options-btn">⋮</button>
       </div>
       <!-- 控制選項 -->
       <div class="layer-controls">
-
-
-        <!-- 色票可能要特別改? -->
         <div class="control-item" style="position: relative;">
-          <span class="color-display">#AAAAAA</span>
-          <label>Start Color</label>
-          <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
+          <span class="color-display">#D3D3D3</span>
+          <label>Color</label>
+          <input type="color" value="#D3D3D3" id="grid-color-input" class="color-input" style="display: none;" />
         </div>
-
         <div class="control-item" style="position: relative;">
-          <span class="color-display">#444444</span>
-          <label>End Color</label>
-          <input type="color" value="#444444" class="color-input" style="display: none;" />
+          <span class="width-display">1</span>
+          <label>Width</label>
+          <input type="number" value="1" id="grid-width-input" class="width-input" style="display: none;" /> 
         </div>
-
-
         <div class="control-item" style="position: relative;">
-          <span class="level-display">700m</span>
-          <label>Level</label>
-          <input type="number" value="700" class="level-input" style="display: none;" />
+          <span class="interval-display">30°</span>
+          <label>Interval</label>
+          <input type="number" value="30" id="grid-interval-input" class="interval-input" style="display: none;" /> 
         </div>
-
-
       </div>
     </div>
-      <!-- 其他圖層重複 -->
+
+    <!-- 卡片：Line Layer -->
+    <div class="layer-card">
+      <div class="layer-header">
+        <!-- 左側顯示/隱藏按鈕 -->
+        <img id="toggle-visibility-line" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+        <span class="layer-title">Coastal & Country line</span>
+        <span class="layer-subtitle">Line Layer</span>
+        <button class="options-btn">⋮</button>
+      </div>
+      <!-- 控制選項 -->
+      <div class="layer-controls">
+        <div class="control-item" style="position: relative;">
+          <span class="color-display">#000000</span>
+          <label>Color</label>
+          <input type="color" value="#000000" id="line-color-input" class="color-input" style="display: none;" />
+        </div>
+        <div class="control-item" style="position: relative;">
+          <span class="width-display">2</span>
+          <label>Width</label>
+          <input type="number" value="2" id="line-width-input" class="width-input" style="display: none;" /> 
+        </div>
+        <div class="control-item" style="position: relative;">
+          <span class="resolution-display">50m</span>
+          <label>Resolution</label>
+          <input type="number" value="50" class="resolution-input" style="display: none;" /> 
+        </div>
+      </div>
     </div>
+
+    <!-- 卡片：contour Layer -->
+    <div class="layer-card">
+      <div class="layer-header">
+        <!-- 左側顯示/隱藏按鈕 -->
+        <img id="toggle-visibility-contour" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+        <span class="layer-title">Contour line</span>
+        <span class="layer-subtitle">Contour Layer</span>
+        <button class="options-btn">⋮</button>
+      </div>
+      <!-- 控制選項 -->
+      <div class="layer-controls">
+        <div class="control-item" style="position: relative;">
+          <span class="color-display">#AAAAAA</span>
+          <label>Color</label>
+          <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
+        </div>
+        <div class="control-item" style="position: relative;">
+          <span class="width-display">7px</span>
+          <label>Width</label>
+          <input type="number" value="7" class="width-input" style="display: none;" /> 
+        </div>
+        <div class="control-item" style="position: relative;">
+          <span class="interval-display">30°</span>
+          <label>Interval</label>
+          <input type="number" value="30" class="interval-input" style="display: none;" /> 
+        </div>
+      </div>
+    </div>
+
+  <!-- 卡片：Shading Layer -->
+  <div class="layer-card">
+    <div class="layer-header">
+      <!-- 左側顯示/隱藏按鈕 -->
+      <img id="toggle-visibility-shading" src="./fig/view.png" alt="visibility" class="visibility-icon" />
+      <span class="layer-title">Shading Layer</span>
+      <span class="layer-subtitle">u_compend_of_wind</span>
+      <button class="options-btn">⋮</button>
+    </div>
+    <!-- 控制選項 -->
+    <div class="layer-controls">
+
+
+      <!-- 色票可能要特別改? -->
+      <div class="control-item" style="position: relative;">
+        <span class="color-display">#AAAAAA</span>
+        <label>Start Color</label>
+        <input type="color" value="#AAAAAA" class="color-input" style="display: none;" />
+      </div>
+
+      <div class="control-item" style="position: relative;">
+        <span class="color-display">#444444</span>
+        <label>End Color</label>
+        <input type="color" value="#444444" class="color-input" style="display: none;" />
+      </div>
+
+
+      <div class="control-item" style="position: relative;">
+        <span class="level-display">700m</span>
+        <label>Level</label>
+        <input type="number" value="700" class="level-input" style="display: none;" />
+      </div>
+
+
+    </div>
+  </div>
+    <!-- 其他圖層重複 -->
+  </div>
   
     <!-- 地圖視圖 -->
     <div class="map-view">
