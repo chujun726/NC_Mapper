@@ -1,11 +1,15 @@
 // 切換顯示/隱藏圖層
 
 document.addEventListener('DOMContentLoaded', function () { // 確保資源加載完畢
+  
+  //console.log("Layercard loaded from layercard.js"); // 記錄腳本載入完成
+  //console.log(layer_controll); // 記錄腳本載入完成
 
 
 
 
   // 控制圖層的開關或隱藏
+  /*
   document.querySelectorAll('.visibility-icon').forEach((icon) => {
     // 為每個元素綁定 click 事件
     icon.addEventListener('click', function () {
@@ -21,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
       }
     });
   });
+  */
+
+
   
   // 1. 控制圖層渲染顏色 變數為newColor
 
@@ -69,19 +76,19 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
     });
   });
 
-  //選擇與紀錄width，並限制範圍在5-50px之間
+  //選擇與紀錄width，並限制範圍在0-50px之間
   document.querySelectorAll('.width-input').forEach((input) => {
     input.addEventListener('blur', function () {
       const span = this.previousElementSibling.previousElementSibling; // 找到對應的文字框
       if (span) {
-        let value = this.value || '7'; // 如果輸入框為空，默認為 7
+        let value = this.value || '2'; // 如果輸入框為空，默認為 7
               // 新增範圍檢查，輸入小於 5 或大於 50 時默認為 7
-        if (value < 5 || value > 50) {
-          value = '7';
+        if (value < 0 || value > 50) {
+          value = '2';
         }
 
 
-        span.textContent = `${value}px`; // 更新文字框的值
+        span.textContent = `${value}`; // 更新文字框的值
         span.style.display = 'inline-block'; // 顯示文字框
         this.style.display = 'none'; // 隱藏輸入框
       }
