@@ -1,26 +1,13 @@
 // 切換顯示/隱藏圖層
 
 document.addEventListener('DOMContentLoaded', function () { // 確保資源加載完畢
-
-
-
-
-  // 控制圖層的開關或隱藏
-  document.querySelectorAll('.visibility-icon').forEach((icon) => {
-    // 為每個元素綁定 click 事件
-    icon.addEventListener('click', function () {
-      const visibilityIcon = this; // 取得被點擊的圖示
-      const currentSrc = visibilityIcon.getAttribute('src'); // 獲取目前的 src 屬性
-      console.log("Hidden button clicked"); // 記錄按鈕被點擊
-
-      // 底圖隱藏
-      if (currentSrc === './fig/view.png') {
-        visibilityIcon.setAttribute('src', './fig/hide.png');
-      } else {
-        visibilityIcon.setAttribute('src', './fig/view.png');
-      }
-    });
+  // 點選首頁左上角的ICON，跳轉到 index.html 
+  document.querySelector('.header-content').addEventListener('click', function () {
+    window.location.href = '../起始頁面/index.html'; 
   });
+    
+
+  
   
   // 1. 控制圖層渲染顏色 變數為newColor
 
@@ -69,19 +56,19 @@ document.addEventListener('DOMContentLoaded', function () { // 確保資源加�
     });
   });
 
-  //選擇與紀錄width，並限制範圍在5-50px之間
+  //選擇與紀錄width，並限制範圍在0-50px之間
   document.querySelectorAll('.width-input').forEach((input) => {
     input.addEventListener('blur', function () {
       const span = this.previousElementSibling.previousElementSibling; // 找到對應的文字框
       if (span) {
-        let value = this.value || '7'; // 如果輸入框為空，默認為 7
+        let value = this.value || '2'; // 如果輸入框為空，默認為 7
               // 新增範圍檢查，輸入小於 5 或大於 50 時默認為 7
-        if (value < 5 || value > 50) {
-          value = '7';
+        if (value < 0 || value > 50) {
+          value = '2';
         }
 
 
-        span.textContent = `${value}px`; // 更新文字框的值
+        span.textContent = `${value}`; // 更新文字框的值
         span.style.display = 'inline-block'; // 顯示文字框
         this.style.display = 'none'; // 隱藏輸入框
       }
