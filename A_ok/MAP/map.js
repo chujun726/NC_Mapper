@@ -60,47 +60,63 @@ function initializeGridLayer() {
 
   // 更新格網線樣式的函數
   function updateGridStyle() {
-      const color = colorInput.value;
-      const width = parseFloat(widthInput.value);
-      const interval = parseFloat(intervalInput.value);
+    const color = colorInput.value;
+    const width = parseFloat(widthInput.value);
+    const interval = parseFloat(intervalInput.value);
 
-      // 如果已存在格網，先移除它
-      if (graticule) {
-          map.removeLayer(graticule);
-      }
-
-      // 創建新的格網線圖層
-      graticule = new ol.layer.Graticule({
-          // 基本樣式設置
-          strokeStyle: new ol.style.Stroke({
-              color: color,
-              width: width
-          }),
-          showLabels: true,
-          wrapX: false,
-          
-          // 間隔相關設置
-          intervals: [interval],         // 固定間隔
-          maxLines: 500,                // 增加最大線條數量
-          minDistance: 20,              // 降低最小間距（像素）
-          targetSize: 50,               // 降低目標大小（像素）
-          
-          // 標籤相關設置
-          lonLabelPosition: 0,        // 經度標籤位置
-          latLabelPosition: 1,        // 緯度標籤位置
-          /*lonLabelFormatter: function(lon) {  // 自定義經度標籤格式
-              return lon.toFixed(1) + '°';
-          },
-          latLabelFormatter: function(lat) {  // 自定義緯度標籤格式
-              return lat.toFixed(1) + '°';
-          }*/
-      });
-         // 設置圖層的 layerId
-      graticule.set('layerId', 'grid_layer');
-
-      // 添加新的格網到地圖
-      map.addLayer(graticule);
-      return graticule;
+    // 如果已存在格網，直接更新樣式而不是重新創建
+    if (graticule) {
+        try {
+            graticule.setStyle(new ol.style.Stroke({
+                color: color,
+                width: width
+            }));
+            graticule.setInterval(interval);
+        } catch (error) {
+            console.error('Error updating existing graticule:', error);
+            // 如果更新失敗，回退到重新創建
+            map.removeLayer(graticule);
+            graticule = null;
+        }
+    }
+    
+    // 如果不存在或更新失敗才創建新的
+    if (!graticule) {
+        graticule = new ol.layer.Graticule({
+            // 基本樣式設置
+            strokeStyle: new ol.style.Stroke({
+                color: color,
+                width: width
+            }),
+            showLabels: true,
+            wrapX: false,
+            
+            // 間隔相關設置
+            intervals: [interval],         // 固定間隔
+            maxLines: 500,                // 增加最大線條數量
+            minDistance: 20,              // 降低最小間距（像素）
+            targetSize: 50,               // 降低目標大小（像素）
+            
+            // 標籤相關設置
+            lonLabelPosition: 0,        // 經度標籤位置
+            latLabelPosition: 1,        // 緯度標籤位置
+            lonLabelFormatter: function(lon) {  // 自定義經度標籤格式
+                return lon.toFixed(1) + '°';
+            },
+            latLabelFormatter: function(lat) {  // 自定義緯度標籤格式
+                return lat.toFixed(1) + '°';
+            }
+        });
+        
+        // 設置圖層屬性
+        graticule.set('layerId', 'grid_layer');
+        graticule.setZIndex(150);  // 確保設置 z-index
+        
+        // 添加到地圖
+        map.addLayer(graticule);
+    }
+    
+    return graticule;
   }
 
    // 添加事件監聽器
