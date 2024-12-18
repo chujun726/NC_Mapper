@@ -1,0 +1,19 @@
+    /* 整體樣式 */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* 避免畫面溢出 */
+    }
+
+    .map-container {
+      height: calc(100vh - 100px); 
+      width: 100%;
+      position: relative;
+      /*margin-top: 60px;*/
+    }
+
+    /* 顯示經緯度格網的樣式（可選） */
+    .ol-scale-line {
+      bottom: 10px;
+      left: 10px;
+    }

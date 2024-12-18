@@ -8,6 +8,7 @@ import geopandas as gpd
 import matplotlib as mpl
 import os
 import pandas as pd
+from typing import Union
 
 
 def check_and_convert_color(color) -> tuple:
@@ -64,7 +65,7 @@ def check_lon(lon) -> None:
         raise ValueError("經度必須介於-180和180之間。")
 
 
-def check_positive(value: int | float) -> None:
+def check_positive(value: Union[int, float]) -> None:
     """
     檢查數字是否為正數。
 
@@ -82,7 +83,7 @@ def check_positive(value: int | float) -> None:
         raise ValueError("數字必須是正數。")
 
 
-def check_not_negative(value: int | float) -> None:
+def check_not_negative(value: Union[int, float]) -> None:
     """
     檢查數字是否為非負數。
 
@@ -170,7 +171,7 @@ def check_is_str(value: any) -> bool:
     return True
 
 
-def check_column_exist_in_df(column_name: str, df: pd.DataFrame | gpd.GeoDataFrame) -> None:
+def check_column_exist_in_df(column_name: str, df: Union[pd.DataFrame, gpd.GeoDataFrame]) -> None:
     """
     檢查DataFrame是否包含指定的列。
 

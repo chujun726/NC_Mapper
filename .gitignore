@@ -1,2 +1,6 @@
 .DS_Store
 backend/.DS_Store
+A_ok/python/envs/ncmapper/Library/lib/grpc.lib
+A_ok/python/envs/ncmapper/Library/lib/grpc_unsecure.lib
+A_ok/python/envs/ncmapper/Library/bin/mkl_core.2.dll
+A_ok/python/envs/ncmapper/Library/bin/mkl_avx512.2.dll

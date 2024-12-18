@@ -20,8 +20,8 @@ if (!$dimensions ||
     exit;
 }
 
-// TODO: 在這裡處理維度數據
-// 例如：保存到資料庫、更新檔案等
+// 儲存選項
+file_put_contents('dimensions.json', json_encode($dimensions, JSON_PRETTY_PRINT));
 
 // 回傳處理結果，會在console.log顯示
 $response = [

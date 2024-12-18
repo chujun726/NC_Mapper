@@ -56,12 +56,12 @@ class ContourLayer(Raster):
     def __init__(self,
                  geotiff_path: str,
                  band: int = 1,
-                 value_base: int | float = 0,
-                 value_interval: int | float | str = "auto",
+                 value_base: Union[int, float] = 0,
+                 value_interval: Union[int, float, str] = "auto",
                  primary_contour_each: int = 5,
                  line_color: str = "#111111",
-                 line_width: int | float = 0.4,
-                 font_size: int | float = 8,
+                 line_width: Union[int, float] = 0.4,
+                 font_size: Union[int, float] = 8,
                  font_color: str = "#111111",
                  label_format: str = '%.1f',
                  generalization: int = 0,
@@ -130,7 +130,7 @@ class ContourLayer(Raster):
         return self.__value_base
 
     @value_base.setter
-    def value_base(self, value_base: int | float):
+    def value_base(self, value_base: Union[int, float]):
         if not isinstance(value_base, (int, float)):
             raise TypeError("value_base必須是int或float。")
         self.__value_base = value_base
@@ -140,7 +140,7 @@ class ContourLayer(Raster):
         return self.__value_interval
 
     @value_interval.setter
-    def value_interval(self, value_interval: int | float):
+    def value_interval(self, value_interval: Union[int, float]):
         if value_interval == "auto":
             self.set_default_interval()
             return
@@ -179,7 +179,7 @@ class ContourLayer(Raster):
         return self.__line_width
 
     @line_width.setter
-    def line_width(self, line_width: int | float):
+    def line_width(self, line_width: Union[int, float]):
         if not isinstance(line_width, (int, float)):
             raise TypeError("line_width必須是int或float。")
         check_positive(line_width)
@@ -190,7 +190,7 @@ class ContourLayer(Raster):
         return self.__font_size
 
     @font_size.setter
-    def font_size(self, font_size: int | float):
+    def font_size(self, font_size: Union[int, float]):
         if not isinstance(font_size, (int, float)):
             raise TypeError("font_size必須是int或float。")
         check_positive(font_size)

@@ -55,7 +55,7 @@ class ShadingLayer(Raster):
                  band: int = 1,
                  value_color_dict: str = "auto",
                  value_type: str = "continuous",
-                 colorbar_ticks: list | str = "auto",
+                 colorbar_ticks: Union[list, str] = "auto",
                  colorbar_extend: str = "neither",
                  colorbar_title_label: str = "",
                  interpolation: str = "nearest",
@@ -135,7 +135,7 @@ class ShadingLayer(Raster):
         return self.__colorbar_ticks
 
     @colorbar_ticks.setter
-    def colorbar_ticks(self, colorbar_ticks: list | str):
+    def colorbar_ticks(self, colorbar_ticks: Union[list, str]):
         if isinstance(colorbar_ticks, list):
             colorbar_ticks = colorbar_ticks
         elif isinstance(colorbar_ticks, np.ndarray):
@@ -233,7 +233,7 @@ class ShadingLayer(Raster):
 
         return value_color_dict
 
-    def set_mpl_color_map(self, color_map_name: str, min_value: float | None = None, max_value: float | None = None) -> dict:
+    def set_mpl_color_map(self, color_map_name: str, min_value: Union[float, None] = None, max_value: Union[float, None] = None) -> dict:
         """
         設置為matplotlib的色階。
 

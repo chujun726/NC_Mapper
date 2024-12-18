@@ -4,6 +4,7 @@ import os
 import rasterio
 from rasterio.transform import from_origin
 import xarray as xr
+from typing import Optional, Union
 
 
 class NetCDFDataset(object):
@@ -60,7 +61,7 @@ class NetCDFDataset(object):
             選取指定的變數、時間、層面、緯度、經度的二維資料，並將該資料存成GeoTiff檔案。
     """
 
-    def __init__(self, file_path: str, x_name: str, y_name: str, z_name: str | None, time_name: str | None, *args, **kwargs) -> None:
+    def __init__(self, file_path: str, x_name: str, y_name: str, z_name: Union[str, None], time_name: Union[str, None], *args, **kwargs) -> None:
         """
         建立一個 NetCDFDataset 物件。
 
@@ -354,8 +355,8 @@ class NetCDFDataset(object):
                  variable: str,
                  time: any,
                  z: any,
-                 x_range: list | None = None,
-                 y_range: list | None = None,
+                 x_range: Union[list, None] = None,
+                 y_range: Union[list, None] = None,
                  interpolation_to_equal_interval: bool = False
                  ) -> tuple:
         """
@@ -525,7 +526,7 @@ class NetCDFDataset(object):
 
         return result, ndarray, geotransform
 
-    def select_to_xarray(self, variable: str, time: any, z: any, x_range: list | None = None, y_range: list | None = None, interpolation_to_equal_interval: bool = False) -> xr.DataArray:
+    def select_to_xarray(self, variable: str, time: any, z: any, x_range: Union[list, None] = None, y_range: Union[list, None] = None, interpolation_to_equal_interval: bool = False) -> xr.DataArray:
         """
         選取指定的變數、時間、層面、緯度、經度的二維資料，並回傳該資料的xarray.DataArray。
 
@@ -543,7 +544,7 @@ class NetCDFDataset(object):
         result, _, _ = self.__select(variable, time, z, x_range, y_range, interpolation_to_equal_interval)
         return result
 
-    def select_to_ndarray(self, variable: str, time: any, z: any, x_range: list | None = None, y_range: list | None = None) -> np.ndarray:
+    def select_to_ndarray(self, variable: str, time: any, z: any, x_range: Union[list, None] = None, y_range: Union[list, None] = None) -> np.ndarray:
         """
         選取指定的變數、時間、層面、緯度、經度的二維資料，並回傳該資料的np.ndarray。
 
@@ -565,8 +566,8 @@ class NetCDFDataset(object):
                           variable: str,
                           time: any,
                           z: any,
-                          x_range: list | None = None,
-                          y_range: list | None = None,
+                          x_range: Union[list, None] = None,
+                          y_range: Union[list, None] = None,
                           ) -> None:
         """
         選取指定的變數、時間、層面、緯度、經度的二維資料，並將該資料存成GeoTiff檔案。

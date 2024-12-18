@@ -282,7 +282,7 @@ class Raster(Layer):
             self.blur_data(size, normalize=normalize)
             self.__generalization = size
 
-    def sliced_array_by_data_coordinate_system(self, x_left: int | float, x_right: int | float, y_bottom: int | float, y_top: int | float) -> tuple:
+    def sliced_array_by_data_coordinate_system(self, x_left: Union[int, float], x_right: Union[int, float], y_bottom: Union[int, float], y_top: Union[int, float]) -> tuple:
         """
         根據資料的座標系統切割數據。
 
@@ -322,7 +322,7 @@ class Raster(Layer):
 
         return (sliced_data, sliced_transform)
 
-    def slice_data_by_data_coordinate_system(self, x_left: int | float, x_right: int | float, y_bottom: int | float, y_top: int | float):
+    def slice_data_by_data_coordinate_system(self, x_left: Union[int, float], x_right: Union[int, float], y_bottom: Union[int, float], y_top: Union[int, float]):
         """
         根據資料的座標系統切割本圖層，本操作會直接異動本圖層的數據。
 

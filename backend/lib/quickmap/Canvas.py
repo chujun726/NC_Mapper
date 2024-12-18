@@ -41,13 +41,13 @@ class Canvas(object):
                              ccrs.Orthographic)
 
     def __init__(self,
-                 x_left: int | float = -180,
-                 x_right: int | float = 180,
-                 y_min: int | float = 90,
-                 y_max: int | float = -90,
+                 x_left: Union[int, float] = -180,
+                 x_right: Union[int, float] = 180,
+                 y_min: Union[int, float] = 90,
+                 y_max: Union[int, float] = -90,
                  edge_color: str = "#1E1E1E",
                  edge_width: float = 0.8,
-                 display_projection_crs: str | ccrs.Projection = "platecarree",
+                 display_projection_crs: Union[str, ccrs.Projection] = "platecarree",
                  ignore_warning: bool = False):
         """
         初始化地圖的繪圖區。
@@ -95,7 +95,7 @@ class Canvas(object):
         return self.__x_left
 
     @x_left.setter
-    def x_left(self, x_left: int | float):
+    def x_left(self, x_left: Union[int, float]):
         # 是int或float
         if not isinstance(x_left, (int, float)):
             raise TypeError("x_left must be an integer or a float.")
@@ -115,7 +115,7 @@ class Canvas(object):
         return self.__x_right
 
     @x_right.setter
-    def x_right(self, x_right: int | float):
+    def x_right(self, x_right: Union[int, float]):
         # 是int或float
         if not isinstance(x_right, (int, float)):
             raise TypeError("x_right must be an integer or a float.")
@@ -135,7 +135,7 @@ class Canvas(object):
         return self.__y_max
 
     @y_max.setter
-    def y_max(self, y_max: int | float):
+    def y_max(self, y_max: Union[int, float]):
         # 是int或float
         if not isinstance(y_max, (int, float)):
             raise TypeError("y_max must be an integer or a float.")
@@ -155,7 +155,7 @@ class Canvas(object):
         return self.__y_min
 
     @y_min.setter
-    def y_min(self, y_min: int | float):
+    def y_min(self, y_min: Union[int, float]):
         # 是int或float
         if not isinstance(y_min, (int, float)):
             raise TypeError("y_min must be an integer or a float.")
@@ -198,7 +198,7 @@ class Canvas(object):
         return self.__display_projection_crs
 
     @display_projection_crs.setter
-    def display_projection_crs(self, display_projection_crs: str | ccrs.Projection):
+    def display_projection_crs(self, display_projection_crs: Union[str, ccrs.Projection]):
         # if is string, check if it is supported
         if isinstance(display_projection_crs, str):
             if display_projection_crs not in self.supported_default_projection:

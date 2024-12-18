@@ -8,6 +8,8 @@ header('Access-Control-Allow-Headers: Content-Type');
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
+file_put_contents('variables.json', json_encode($data, JSON_PRETTY_PRINT));
+
 // 簡單的回應，用於測試
 $response = [
     'status' => 'success',

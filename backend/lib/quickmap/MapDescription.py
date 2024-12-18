@@ -6,6 +6,7 @@ Description: This module defines a map class for quickmap.
 from cartopy import crs as ccrs
 import numpy as np
 import json
+from typing import Union, List, Tuple
 
 from .Canvas import Canvas
 from .CoastlineLayer import CoastlineLayer
@@ -538,7 +539,7 @@ class MapDescription(object):
         self.__colorbar = colorbar
 
     @staticmethod
-    def get_proper_grid(x_range: int | float = 360, y_range: int | float = 180, max_grid_line_count: int = 12) -> tuple[list[float], list[float]]:
+    def get_proper_grid(x_range: Union[int, float] = 360, y_range: Union[int, float] = 180, max_grid_line_count: int = 12) -> Tuple[List[float], List[float]]:
         """
         根據畫布的範圍，獲取適合的經緯度網格。
 
@@ -586,7 +587,7 @@ class MapDescription(object):
         return x_grid_list, y_grid_list
 
     @staticmethod
-    def get_proper_resolution(x_range: int | float = 360, y_range: int | float = 180) -> str:
+    def get_proper_resolution(x_range: Union[int, float] = 360, y_range: Union[int, float] = 180) -> str:
         """
         根據畫布的範圍，獲取適合的Nature Earth解析度。
 
@@ -679,7 +680,7 @@ class MapDescription(object):
                 layer.resolution = resolution
         return
 
-    def export_to_json_for_ncmapper(self, json_path: str | None = None, include_original_array: bool = True, include_contour_geojson: bool = True) -> str:
+    def export_to_json_for_ncmapper(self, json_path: Union[str, None] = None, include_original_array: bool = True, include_contour_geojson: bool = True) -> str:
         """
         為ncmaper，將地圖描述文件導出為json文件。
 

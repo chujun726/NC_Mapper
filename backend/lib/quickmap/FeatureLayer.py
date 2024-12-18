@@ -76,7 +76,7 @@ class FeatureLayer(Layer):
 
     def __init__(self,
                  feature_path: str,
-                 value_column_name: str | None = None,
+                 value_column_name: Union[str, None] = None,
                  value_color_dict: str = "auto",
                  edge_default_color: str = "#e15b5b",
                  edge_dynamic_color: bool = False,
@@ -85,7 +85,7 @@ class FeatureLayer(Layer):
                  face_default_color: str = "#f9eeee",
                  face_dynamic_color: bool = False,
                  value_type: str = "continuous",
-                 colorbar_ticks: list | str = "auto",
+                 colorbar_ticks: Union[list, str] = "auto",
                  colorbar_extend: str = "neither",
                  colorbar_title_label: str = "",
                  is_visible=True):
@@ -227,7 +227,7 @@ class FeatureLayer(Layer):
         return value_color_dict
 
     @value_color_dict.setter
-    def value_color_dict(self, value_color_dict: dict | str):
+    def value_color_dict(self, value_color_dict: Union[dict, str]):
         if self.value_column_name is None:
             value_color_dict = dict()
         elif value_color_dict == "auto":
