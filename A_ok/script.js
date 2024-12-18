@@ -239,7 +239,7 @@ $(document).ready(function() {
           heights.forEach(function(height) {
             heightSelect.append($('<option>', {
               value: height,
-              text: height + ' hPa'
+              text: height
             }));
           });
         }
@@ -316,6 +316,9 @@ $(document).ready(function() {
         $('#loading-overlay').hide();
         $('#variables-modal').hide();
         console.log('Variables processed:', response);
+        // 把用戶選項資訊透過URL傳過去
+        const encodedData = encodeURIComponent(JSON.stringify(selectedVariables));
+        window.location.href = `MAP/nc_map_viewer.html?data=${encodedData}`;
       },
       error: function(xhr, status, error) {
         $('#loading-overlay').hide();
